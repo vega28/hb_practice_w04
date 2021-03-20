@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Practice JavaScript</title>
   <link rel="stylesheet" href="static/styles.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -36,7 +37,12 @@
 
 <script>
   "use strict";
-  // code here for above problem
+  const button = document.querySelector('#popup-alert-button');
+  button.addEventListener('click', () => {
+    alert('Hello! Here is your requested popup.');
+  });
+  
+  
 </script>
 
 
@@ -77,8 +83,25 @@
 
 <script>
   "use strict";
+  // prevent form from routing to /nope:
+  const multSubmit = document.querySelector('#multiplying-form');
+  multSubmit.addEventListener('submit', (evt) => {
+  // document.querySelector('#multiplying-form').addEventListener('submit', (evt) => {
+    evt.preventDefault();
+  });
+  // read values in from form:
+  const multNum = Number(document.querySelector('#mults-of').value);
+  const maxNum = Number(document.querySelector('#max').value);
+// TODO: currently registers maxNum as zero no matter what's in the form; thus the 
+//       following loop doesn't happen and multiples is an empty array.
 
-  // code here for the above problem
+  // create array of requested multiples up to requested max (inclusive):
+  const multiples = [];
+  for (let i = multNum; i <= maxNum; i += multNum) {
+    multiples.push(i);
+  }
+  // print the array you've made to the console:
+  console.log(multiples);
 
 </script>
 
