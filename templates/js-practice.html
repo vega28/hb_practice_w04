@@ -88,12 +88,13 @@
   multSubmit.addEventListener('submit', (evt) => {
   // document.querySelector('#multiplying-form').addEventListener('submit', (evt) => {
     evt.preventDefault();
-  });
+  
   // read values in from form:
   const multNum = Number(document.querySelector('#mults-of').value);
   const maxNum = Number(document.querySelector('#max').value);
-// TODO: currently registers maxNum as zero no matter what's in the form; thus the 
+// TODONE: currently registers maxNum as zero no matter what's in the form; thus the 
 //       following loop doesn't happen and multiples is an empty array.
+// FIXED: this all needed to be inside the event listener function!!! works now.
 
   // create array of requested multiples up to requested max (inclusive):
   const multiples = [];
@@ -102,6 +103,7 @@
   }
   // print the array you've made to the console:
   console.log(multiples);
+  });
 
 </script>
 
@@ -135,7 +137,8 @@
 
 <script>
   "use strict";
-  // code here for above problem
+  $('.find-me').on('click', () => alert('Hi! I\'m your popup!'));
+
 </script>
 
 <div class="hint">
@@ -167,7 +170,7 @@
 
 <script>
   "use strict";
-  // put your code here
+  $('#make-a-porcupine').on('click', () => $('#cute-porcupine-image').delay(1000).slideDown(1000));
 </script>
 
 <div class="hint">
@@ -198,7 +201,14 @@
 
 <script>
   "use strict";
-  // put your code here
+
+  $('#agreeable-form').on('submit', (evt) => {
+    evt.preventDefault();
+    // FIXME: $('#favorite-food-input').value is undefined!!!
+    //        checked that $('#favorite-food-input') exists AND has value: 'pretzels'
+    // FIXED: was using .value not .val() ... follow up on that distinction!
+    $('#agreeable-text').html(`I like ${$('#favorite-food-input').val()}, too!`);
+  });
 </script>
 
 <div class="hint">
@@ -235,9 +245,18 @@
 <script>
   "use strict";
 
-    var PRIME_COLORS = ['orange', 'midnightblue', 'darkgoldenrod', 'green', 'purple'];
+    let PRIME_COLORS = ['orange', 'midnightblue', 'darkgoldenrod', 'green', 'purple'];
 
-  // put the rest of your code here
+  $('#make-prime-circles').on('click', () => {
+    let primeNum = 1;
+    const primeCircs = [];
+    for (let i=0; i<5; i+=1) {
+      primeCircs.push(`<div class="prime-circle" style="background-color: ${PRIME_COLORS[i]}">${primeNum}</div>`);
+      // TODO: get next prime num;
+      // let primeNum = next prime num;
+    }
+    $('#prime-circle-area').html(primeCircs.join(''));
+  });
 </script>
 
 
@@ -284,7 +303,11 @@
     $("#puppies-go-here").append(puppyPhoto);
   }
 
-  // put your code here
+  $('#puppy-form').on('submit', (evt) => {
+    evt.preventDefault();
+    $.get('/puppies.json', {'num-puppies' : $('#num-puppies').val()}, showPuppies);
+  });
+
 
 </script>
 
